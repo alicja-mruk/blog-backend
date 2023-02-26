@@ -1,9 +1,9 @@
-import express from 'express';
+import express, { Application } from 'express';
 
-import routes from './routes';
+import appRouter from './routes';
 
 class App {
-  public server;
+  public server: Application;
 
   constructor() {
     this.server = express();
@@ -17,7 +17,7 @@ class App {
   }
 
   routes() {
-    this.server.use(routes);
+    this.server.use(appRouter);
   }
 }
 
