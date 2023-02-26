@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import Post from '../models/post';
 
-const routes = Router();
+const router = Router();
 
-routes.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const posts = await Post.find();
     res.json(posts);
@@ -12,4 +12,4 @@ routes.get('/', async (req, res) => {
   }
 });
 
-export default routes;
+export default router;

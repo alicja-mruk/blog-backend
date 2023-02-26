@@ -14,7 +14,7 @@ export const mongooseLoader = async (): Promise<Db> => {
     loggerDev.info('MongoDB has been connected');
     return mongoConnection.connection.db;
   } catch (err) {
-    loggerDev.error(err.message);
+    loggerDev.error('MongoDB connection error', err.message);
     process.exit(1);
   }
 };
