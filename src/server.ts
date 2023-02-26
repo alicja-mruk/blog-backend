@@ -1,8 +1,20 @@
-import app from './app';
-import { config } from './config';
+import express, { Application } from 'express';
+import { config } from 'src/config';
+import { loaders } from 'src/loaders';
+import { loggerDev } from 'src/utils/logger';
 
-app
-  .listen(config.port, () => console.log(`Server started on port ${config.port}`))
-  .on('error', err => {
-    process.exit(1);
-  });
+const startServer = async () => {
+  const app: Application = express();
+  await loaders(app);
+  app
+    .listen(config.port, () => {
+      loggerDev.info(`Server listening on port: ${config.port}`);
+    })
+    .on('error', err => {
+      loggerDev.error(err);
+      process.exit(1);
+    });
+};
+
+startServer();
+
