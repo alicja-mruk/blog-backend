@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import 'reflect-metadata';
 import { config } from 'src/config';
 import { loaders } from 'src/loaders';
 import { loggerDev } from 'src/utils/logger';
@@ -17,4 +18,3 @@ const startServer = async () => {
 };
 
 startServer();
-
