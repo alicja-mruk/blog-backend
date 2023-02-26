@@ -1,13 +1,11 @@
 import mongoose from 'mongoose';
 import { Entity } from 'src/types';
 import { IPost } from 'src/types/post';
-import { authorSchema } from './author';
 
 const Schema = mongoose.Schema;
 
-
 const postSchema = new Schema({
-  author: authorSchema,
+  // author: authorSchema,
   title: {
     type: String,
     required: true,
