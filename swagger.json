@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My User Project CRUD",
+    "description": "My User Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Blog api"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/posts": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get all posts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Posts"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Posts"],
+        "description": "Create new post",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "Post that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New post is created",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          },
+          "400": {
+            "description": "Request does not contain all required fields",
+            "schema": {
+              "$ref": "#/definitions/InvalidRequest"
+            }
+          }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of post that we want to find",
+          "type": "integer"
+        }
+      ],
+      "delete": {
+        "summary": "Delete post with given ID",
+        "tags": ["Posts"],
+        "responses": {
+          "200": {
+            "description": "Post is deleted",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          },
+          "400": {
+            "description": "Request does not contain all required fields",
+            "schema": {
+              "$ref": "#/definitions/InvalidRequest"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Post": {
+      "required": ["id", "author", "title", "body"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "author": {
+          "type": "object",
+          "$ref": "#/definitions/Author"
+        },
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      }
+    },
+    "Author": {
+      "required": ["name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    },
+    "Posts": {
+      "type": "array",
+      "$ref": "#/definitions/Post"
+    },
+    "InvalidRequest": {
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
